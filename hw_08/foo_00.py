@@ -34,10 +34,14 @@ class WordCount():
 
     # method
     def containsWord(self, words_ls, word):
+        count = 0
         if any(word in index for index in words_ls):
             count = 1
-        else:
-            count = 0
         return count
     # end method search
+
+    # method
+    def createHistogram():
+        pass
+    # end method createHistogram
 # end class WordCount
