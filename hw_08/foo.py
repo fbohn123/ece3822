@@ -1,25 +1,42 @@
 #!/usr/bin/env python
 # file: foo.py
-# description: loop over all *.txt files in the example database
+# description:
 
 # import the following modules
 import os
 import sys
+from foo_00 import WordCount
 
 # main
 def main(argv):
-    """ Traverses through a directory and search for all .*txt files and stores the full path to the .txt in an output file.
-    Usage: python foo.py <target> <output file> """
-    my_path = argv[1]
-    output_file = argv[2]
-    f = open(output_file, "w")
-    for root, dirs, files in os.walk(my_path):
-        for file in files:
-            if file.endswith(".txt"):
-                # print(os.path.join(root, file))
-                # print "true"
-                txt_path = os.path.join(root, file)
-                f.write(txt_path + '\n')
+    # check command line arguments
+    if len(argv) == 1:
+        sys.exit("Missing argument(s)")
+    # end if
+
+    filename = argv[1]
+    word = argv[2]
+
+    try:
+        # open file
+        f = open(filename, "r")
+    # end try
+
+    # if not then exit the program
+    except:
+        print filename + ": No such file or directory"
+        sys.exit()
+
+    # create object
+    database_obj = WordCount()
+
+    num_file = 0
+    #
+    for path in f:
+        path = path.rstrip("\n")
+        db_list = database_obj.read(path)
+        num_file += database_obj.containsWord(db_list, word)
+    print "A total of %d files contained the word '%s'" %(num_file, word)
     f.close()
 # end main
 
