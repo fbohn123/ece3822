@@ -36,11 +36,12 @@ def main(argv):
     # create object
     database_obj = WordCount()
 
-    # initialize count for the number of file
+    # initialize
     num_file = 0
     num_words = 0
     tmp = []
     record = {}
+
     # loop through every line/path in the txt file
     for path in f:
         # remove the new line characters
@@ -53,19 +54,35 @@ def main(argv):
         num_file += database_obj.containsWord(db_list, search_term)[0]
         list_with_word = database_obj.containsWord(db_list, search_term)[1]
 
+        # check if the list is not empty
         if len(list_with_word) != 0:
+            # loop through every word in the list
             for word in list_with_word:
+                # if the word is not in dictionary store it in the dictionary
                 if not record.has_key(word):
+                    # initialize the new key with a value of 1
                     record[word] = 1
-                else:
-                    record[word] = record[word] + 1
-        
-    # end for loop
+                # end if
 
+                # if the word is already in the dictionary
+                else:
+                    # increment the existing count by 1
+                    record[word] = record[word] + 1
+                # end else
+            # end for loop
+        # end if
+
+    # end for loop
+    
+    # compute the total number of words
     num_words = database_obj.totalWords(record)
+
+    # compute the average number of words per file
     avg_wpf = float(num_words)/float(num_file)
+
+    # generate a Histogram
     database_obj.createHistogram(record,search_term)
-    #
+
     # end timer
     toc = time.clock()
 
@@ -78,6 +95,7 @@ def main(argv):
     print "Total runtime: %f s" %(runtime)
     # close file(s)
     f.close()
+
 # end main
 
 # begin gracefully

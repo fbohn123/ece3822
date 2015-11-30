@@ -47,9 +47,10 @@ class WordCount():
     # return: count = 1 if word is in the list or 0 if it is not
     #
     def containsWord(self, txt_ls, search_term):
-        # initialize and declare count
+        # initialize
         count = 0
         word_ls = []
+
         # search for any occurrances of the word in the list
         # include an variation of the word
         # ex: 'spikes', if word is 'spike'
@@ -57,13 +58,13 @@ class WordCount():
             # set count to 1
             count = 1
 
-            #
+            # set the word_ls to txt_ls
             word_ls = txt_ls
 
+        # end if
+
+        # return the count and the list
         return (count, word_ls)
-
-
-
     # end method containsWord
 
 
@@ -75,25 +76,40 @@ class WordCount():
 
     # method:
     def createHistogram(self, record, search_term):
+        # initialize total number of words
         total = 0
 
+        # print heading
         print "-"*(61 + len(search_term))
         print "Histogram of all the word in all files that have the word '%s'." %(search_term)
         print "-"*(61 + len(search_term))
+
+        # compute the total number of words
         total = self.totalWords(record)
+
+        # 
         for word in sorted(record, key=record.get, reverse=True):
-            # word = record[i][0]
-            # count = record[i][1]
+            # width is used to space out the word from the percentage
             width = 36 - len(word)
+
+            # compute the percentage
             percentage = float(record[word])/total * 100
 
+            # print out the word and the percentage
             print "%s %s %.6f %%" %(str(word), str(" "*width), percentage )
+        # end for loop
+
     # end createHistogram
 
-    # method
+    # method:
+    # arguments:
+    # return:
+    #
     def twoWordList(self,txt_ls):
         two_words = []
         for i in range(0,len(txt_ls) - 1):
             two_words.append(txt_ls[i] + " " + txt_ls[i+1])
         return two_words
+    # end twoWordList
+
 # end class WordCount

@@ -50,24 +50,36 @@ def main(argv):
 
         # list with all tow word sequences -- uncomment to run.
         tw_list = database_obj.twoWordList(db_list)
-        # print tw_list
-        # count the number files with the search term entered via command line arg
-        # num_file += database_obj.containsWord(db_list, search_term)[0]
-        # list_with_word = database_obj.containsWord(db_list, search_term)[1]
+
+        # increment the counter for the number of files
         num_file += 1
-        if len(tw_list) != 0:
-            # print tmp
-            for word in tw_list:
-                if not record.has_key(word):
-                    record[word] = 1
-                else:
-                    record[word] = record[word] + 1
-            # print tmp
+
+        # loop through every word in the list and store it in the dictionary record
+        for word in tw_list:
+            # if the word is not in dictionary store it in the dictionary
+            if not record.has_key(word):
+                # initialize the new key with a value of 1
+                record[word] = 1
+
+            # end if
+
+            # if the word is already in the dictionary
+            else:
+                # increment the existing count by 1
+                record[word] = record[word] + 1
+            # end else
+
+        # end for loop
 
     # end for loop
     
+    # compute the total number of words
     num_words = database_obj.totalWords(record)
+
+    # compute the average number of words per file
     avg_wpf = float(num_words)/float(num_file)
+
+    # generate a Histogram
     database_obj.createHistogram(record,search_term)
 
     # end timer
