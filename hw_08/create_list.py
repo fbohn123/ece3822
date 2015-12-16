@@ -10,7 +10,7 @@ import sys
 def main(argv):
     """ Traverses through a directory and search for all .*txt files and stores the full path to the .txt in an output file.
     Usage: python foo.py <target> <output file> """
-    #
+    # initialize
     my_path = argv[1]
     output_file = argv[2]
 
@@ -29,6 +29,7 @@ def main(argv):
 
     # close file
     f.close()
+
 # end main
 
 # begin gracefully
