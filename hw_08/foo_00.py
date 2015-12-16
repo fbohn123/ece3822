@@ -74,7 +74,8 @@ class WordCount():
             total += int(record[word])
         return total
 
-    # method:
+    # method: createHistogram
+    # arguments:
     def createHistogram(self, record, search_term):
         # initialize total number of words
         total = 0
@@ -87,7 +88,7 @@ class WordCount():
         # compute the total number of words
         total = self.totalWords(record)
 
-        # 
+        #
         for word in sorted(record, key=record.get, reverse=True):
             # width is used to space out the word from the percentage
             width = 36 - len(word)
